@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import useMarvelService from "../../services/MarvelService";
 
 import "./comicsList.scss";
-import uw from "../../resources/img/UW.png";
-import xMen from "../../resources/img/x-men.png";
 
 const ComicsList = () => {
   const [comicsList, setComicsList] = useState([]);
   const [newItemLoading, setNewItemLoading] = useState(false);
-  const [offset, setOffset] = useState(210);
+  const [offset, setOffset] = useState(0);
   const [comicsEnded, setComicsEnded] = useState(false);
 
   const { loading, error, getAllComics } = useMarvelService();
@@ -32,40 +29,24 @@ const ComicsList = () => {
       ended = true;
     }
 
-    setComicsList((comicsList) => [...comicsList, ...newComicsList]);
+    setComicsList([...comicsList, ...newComicsList]);
     setNewItemLoading(false);
-    setOffset((offset) => offset + 8);
-    setComicsEnded((comicsEnded) => ended);
+    setOffset(offset + 8);
+    setComicsEnded(ended);
   };
-
-  // const itemRefs = useRef([]);
-
-  // const focusOnItem = (id) => {
-  //   itemRefs.current.forEach((item) =>
-  //     item.classList.remove("comics__item_selected")
-  //   );
-  //   itemRefs.current[id].classList.add("comics__item_selected");
-  //   itemRefs.current[id].focus();
-  // };
 
   function renderItems(arr) {
     const items = arr.map((item, i) => {
-      //let imgStyle = { objectFit: "cover" };
-      // if (
-      //   item.thumbnail ===
-      //   "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
-      // ) {
-      //   imgStyle = { objectFit: "unset" };
-      // }
-
       return (
-        <li className="comics__item">
+        <li className="comics__item" key={i}>
           <a href="#">
-            <img src={uw} alt="ultimate war" className="comics__item-img" />
-            <div className="comics__item-name">
-              ULTIMATE X-MEN VOL. 5: ULTIMATE WAR TPB
-            </div>
-            <div className="comics__item-price">9.99$</div>
+            <img
+              src={item.thumbnail}
+              alt={item.title}
+              className="comics__item-img"
+            />
+            <div className="comics__item-name">{item.title}</div>
+            <div className="comics__item-price">{item.price}</div>
           </a>
         </li>
       );
@@ -84,7 +65,12 @@ const ComicsList = () => {
       {errorMessage}
       {spinner}
       {items}
-      <button className="button button__main button__long">
+      <button
+        disabled={newItemLoading}
+        style={{ display: comicsEnded ? "none" : "block" }}
+        className="button button__main button__long"
+        onClick={() => onRequest(offset)}
+      >
         <div className="inner">load more</div>
       </button>
     </div>
