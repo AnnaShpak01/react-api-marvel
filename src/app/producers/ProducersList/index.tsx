@@ -1,7 +1,11 @@
 'use client'
 import { rootStore } from '@/app/layout'
-import ProducersListWithVM from './ProducersListWithVM'
+import withVM from '@/lib/withVM'
 
-const ProducersList = () => <ProducersListWithVM rootStore={rootStore} />
+import ProducersList from './ProducersList'
+import ProducersListVM from './ProducersListVM'
 
-export default ProducersList
+const ProducersListWithVM = withVM(ProducersList, ProducersListVM)
+const ProducersListWithStore = () => <ProducersListWithVM rootStore={rootStore} />
+
+export default ProducersListWithStore

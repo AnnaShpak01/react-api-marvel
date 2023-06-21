@@ -1,4 +1,3 @@
-'use client'
 import { rootStore } from '@/app/layout'
 import ProducersStore from '@/stores/ProducersStore'
 import RootStore from '@/stores/RootStore'
