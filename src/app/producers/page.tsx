@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
+import ProducersList from './ProducersList'
+import { rootStore } from '@/app/layout'
 
 export const metadata: Metadata = {
   title: 'About page',
@@ -10,6 +11,7 @@ export default function Page() {
   return (
     <div className="">
       <h1>Hello, Demo page!</h1>
+      <ProducersList rootStore={rootStore} />
     </div>
   )
 }

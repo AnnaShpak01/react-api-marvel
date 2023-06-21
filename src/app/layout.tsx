@@ -1,10 +1,12 @@
 import './globals.css'
-
 import { Inter } from 'next/font/google'
-import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
+import RootStore from '@/stores/RootStore'
 
 const inter = Inter({ subsets: ['latin'] })
+export const rootStore = new RootStore()
+rootStore.init()
 
 export const metadata = {
   title: { template: '%s | Azaza', default: 'Create Next App' },
@@ -24,8 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-2xl">Home</span>
               </Link>
             </div>
-            <p className="fixed text-2xl left-0 top-0 flex w-full justify-center  from-zinc-200 pb-6 pt-8 backdrop-blur-2xl  lg:static lg:w-auto lg:p-4 ">
-              <Link href="/demo">Demo</Link>
+            <p className="fixed text-2xl left-0 top-0 flex w-full justify-center  from-zinc-200 pb-6 pt-8 lg:static lg:w-auto lg:p-4 ">
+              <Link href="/producers">Producers</Link>
             </p>
           </div>
           {children}
