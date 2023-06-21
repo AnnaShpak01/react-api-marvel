@@ -15,8 +15,9 @@ export default class ProducersStore implements IProducersStoreProps {
   rootStore: RootStore
 
   async getProducersList() {
-    this.producers = await getProducers()
+    this.set('producers', await getProducers())
   }
+
   /**
    * Helper to set values through mobx actions.
    */
@@ -31,12 +32,12 @@ export default class ProducersStore implements IProducersStoreProps {
     Object.assign(this, props)
   }
 
-  init() {
-    this.getProducersList()
+  clearError() {
+    this.set('error', null)
   }
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore
-    mobx.makeAutoObservable(this, {}, { autoBind: true, deep: false })
+    mobx.makeAutoObservable(this, { rootStore: false }, { autoBind: true, deep: false })
   }
 }

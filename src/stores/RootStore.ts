@@ -1,5 +1,5 @@
 import * as mobx from 'mobx'
-import ProducersStore from './producersStore'
+import ProducersStore from './ProducersStore'
 
 interface IRootStoreProps {
   error: Error | null
@@ -9,9 +9,18 @@ interface IRootStoreProps {
 
 export default class RootStore implements IRootStoreProps {
   error: Error | null = null
-  pending = false
+  pending = true
   producersStore: ProducersStore
   route = ''
+
+  /**
+   * Reset error state to null for any model that might have an error.
+   * rootStore.error computed value will be null as a result.
+   */
+  clearError() {
+    this.set('error', null)
+    this.producersStore.clearError()
+  }
 
   /**
    * Helper to set values through mobx actions.
@@ -27,12 +36,17 @@ export default class RootStore implements IRootStoreProps {
     Object.assign(this, props)
   }
 
-  public async init() {
+  setError(error: Error) {
+    this.error = error
+  }
+
+  init() {
     this.route = 'init'
+    this.pending = false
   }
 
   constructor() {
     this.producersStore = new ProducersStore(this)
-    mobx.makeAutoObservable(this, {}, { autoBind: true, deep: false })
+    mobx.makeAutoObservable(this, { producersStore: false }, { autoBind: true, deep: false })
   }
 }

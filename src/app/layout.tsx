@@ -6,7 +6,6 @@ import RootStore from '@/stores/RootStore'
 
 const inter = Inter({ subsets: ['latin'] })
 export const rootStore = new RootStore()
-rootStore.init()
 
 export const metadata = {
   title: { template: '%s | Azaza', default: 'Create Next App' },

@@ -1,6 +1,6 @@
 import _axios from 'axios'
 
-const API_URL = process.env.BZX_API_URL
+const API_URL = process.env.API_URL
 
 const axios = _axios.create({
   baseURL: API_URL,
@@ -55,7 +55,7 @@ function normalizeRequestError(error: any) {
  */
 export const getProducers = async () => {
   try {
-    const requestUrl = `${API_URL}/producers`
+    const requestUrl = `${API_URL}producers`
     const resp = await fetch(requestUrl)
     const responseJson = await resp.json()
     return responseJson
