@@ -1,7 +1,10 @@
 import './globals.css'
+
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import React from 'react'
+
+import Navbar from '@/components/Navbar'
 import RootStore from '@/stores/RootStore'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,18 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <main className="flex flex-col items-center justify-between px-12">
-          <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-            <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white lg:static lg:h-auto lg:w-auto lg:bg-none">
-              <Link
-                className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-                href="/">
-                <span className="text-2xl">Home</span>
-              </Link>
-            </div>
-            <p className="fixed text-2xl left-0 top-0 flex w-full justify-center  from-zinc-200 pb-6 pt-8 lg:static lg:w-auto lg:p-4 ">
-              <Link href="/producers">Producers</Link>
-            </p>
-          </div>
+          <Navbar />
           {children}
         </main>
       </body>

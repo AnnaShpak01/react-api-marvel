@@ -51,11 +51,25 @@ function normalizeRequestError(error: any) {
 }
 
 /**
- * Returns an array with merch from OOKI shop
+ * Returns an array with all producers
  */
-export const getProducers = async () => {
+export const fetchProducers = async () => {
   try {
     const requestUrl = `${API_URL}producers`
+    const resp = await fetch(requestUrl)
+    const responseJson = await resp.json()
+    return responseJson
+  } catch (err) {
+    throw normalizeRequestError(err)
+  }
+}
+
+/**
+ * Returns an array with info about products
+ */
+export const fetchProducts = async (producer: string) => {
+  try {
+    const requestUrl = `${API_URL}producers/${producer}/products`
     const resp = await fetch(requestUrl)
     const responseJson = await resp.json()
     return responseJson
