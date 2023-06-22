@@ -10,9 +10,14 @@ export default function Navbar() {
           <span className="text-2xl">Home</span>
         </Link>
       </div>
-      <p className="fixed text-2xl left-0 top-0 flex w-full justify-center  from-zinc-200 pb-6 pt-8 lg:static lg:w-auto lg:p-4 ">
-        <Link href="/producers">Producers</Link>
-      </p>
+      <div className="fixed text-2xl left-0 top-0 flex w-full justify-center  from-zinc-200 pb-6 pt-8 lg:static lg:w-auto ">
+        <p className="pr-4 ">
+          <Link href="/producers">Producers</Link>
+        </p>
+        <p className="">
+          <Link href="/orders">Orders</Link>
+        </p>
+      </div>
     </div>
   )
 }

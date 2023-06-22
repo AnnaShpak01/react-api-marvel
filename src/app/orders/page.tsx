@@ -1,15 +1,14 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Ui components',
-  description: 'Main components for ui',
-  robots: 'noindex,nofollow',
+  title: 'Orders page',
+  description: 'List of orders',
 }
 
 export default function Page() {
   return (
     <div className="">
-      <h1>UI components</h1>
+      <h1>Orders</h1>
     </div>
   )
 }
