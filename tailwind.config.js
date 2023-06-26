@@ -7,9 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-
+      fontFamily: {
+        outfit: ['Outfit', 'sans-serif'],
+        catamaran: ['Catamaran', 'sans-serif'],
       },
+      backgroundImage: {},
     },
   },
   plugins: [],
